@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Tu juego de matemáticas</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Tu juego de matemáticas</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="login-container">
-    <h1>¡Este es tu juego de matemáticas!</h1>
+    <div id="loginInterface">
+        <h1>¡Este es tu juego de matemáticas!</h1>
 
-    <div class="campo">
-        <label for="name">Me llamo</label>
-        <input type="text" id="name" placeholder="Pon aquí tu nombre...">
+        <div class="campo">
+            <label for="name">Me llamo</label>
+            <input type="text" id="name" placeholder="Pon aquí tu nombre...">
+        </div>
+
+        <div class="campo">
+            <label for="password">Mi contraseña es</label>
+            <input type="password" id="password" placeholder="Pon aquí tu contraseña...">
+        </div>
+
+        <div class="campo">
+            <label for="edad">Y tengo 
+            <input type="number" id="edad" placeholder="0"> años</label>
+        </div>
+
+        <button title="Introduce tu nombre, password y edad para continuar" id="loginBtn">Continuar...</button>
+        <p id="mensaje"></p>
+        </div>
     </div>
 
-    <div class="campo">
-        <label for="password">Mi contraseña es</label>
-        <input type="password" id="password" placeholder="Pon aquí tu contraseña...">
+    <div id="welcomeInterface" style="display:none;">
+        <h1>¡HOLA <span id="welcomeNombre"></span>!</h1>
+
+        <div id="welcomeNivel"></div>
+        <p>Como tienes <span id="welcomeEdad"></span> años,
+            te propongo el nivel <span id="welcomePropuesto"></span>.
+            ¿Qué te parece?</p>
+        <div class="welcomeBtn">
+            <button id="welcomeBtnNext">¡Adelante!</button>
+            <button id="welcomeBtnBack">Elegir otra edad...</button>
+        </div>
     </div>
 
-    <div class="campo">
-        <label for="edad">Y tengo 
-        <input type="number" id="edad" placeholder="0"> años</label>
-    </div>
 
-    <button id="loginBtn">Entrar</button>
-    <p id="mensaje"></p>
-  </div>
-
-  <div id="juego-container" style="display:none;">
-    <h2>Bienvenido al juego</h2>
-    <canvas id="canvasJuego" width="400" height="400"></canvas>
-  </div>
-
-  <script src="login.js"></script>
-  <script src="funciones.js"></script>
+    <script src="login.js"></script>
+    <script src="funciones.js"></script>
 </body>
 </html>
