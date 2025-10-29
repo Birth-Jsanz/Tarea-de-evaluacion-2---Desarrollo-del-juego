@@ -5,31 +5,38 @@ body {
     background-color: whitesmoke;
 }
 
-#loginInterface, #juego-container {
+#loginInterface, #welcomeInterface, #juegoInterface, #resultadoInterface {
+    width: 90%;            
+    max-width: 700px;
+    height: 100vh;
+    max-height: 600px;
 
-    width: 90%;        
-    max-width: 400px; 
     margin: auto;
-    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: aqua;
+    box-sizing: border-box;
 }
 
-.campo{
+.loginCampo{
     margin: 12px 0;
     display: flex;            
     align-items: center;   
     justify-content: center;
 }
 
-.campo label {
+.loginCampo label {
     margin-right: 8px;       
     font-weight: bold;
     white-space: nowrap;  
 }
 
-.campo input{
+.loginCampo input{
     flex: 1;                   
     max-width: 200px;      
     padding: 6px;
@@ -83,16 +90,6 @@ input[type="number"] {
     pointer-events: auto;
 }
 
-#welcomeInterface {
-    background-color: lightblue;
-    border-radius: 10px;
-    padding: 5%;
-    width: 90%;
-    max-width: 400px;
-    margin: auto;
-    text-align: center;
-}
-
 .welcomeBtn {
     margin-top: 20px;
     display: flex;
@@ -100,6 +97,86 @@ input[type="number"] {
 }
 
 .welcomeBtn button {
+    background-color: purple;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#juegoOperacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+#juegoOperacion img.simbolo {
+    max-height: 60px;       
+    width: auto;            
+    object-fit: contain;    
+}
+
+#juegoRespuestas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+#juegoRespuestas img.simbolo {
+    max-height: 60px;       
+    width: auto;            
+    object-fit: contain;    
+}
+
+.opcionBtn {
+    background: #eee;
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.opcionBtn:hover {
+    transform: scale(1.1);
+}
+
+.opcionBtn img.simbolo {
+    max-height: 50px;
+    width: auto;
+}
+
+.resultadoBtn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.resultadoBtn button {
+    background-color: purple;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.juegoBtn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.juegoBtn button {
     background-color: purple;
     color: white;
     padding: 10px 20px;

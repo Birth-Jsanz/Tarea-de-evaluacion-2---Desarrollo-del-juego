@@ -9,41 +9,62 @@
     <div id="loginInterface">
         <h1>¡Este es tu juego de matemáticas!</h1>
 
-        <div class="campo">
-            <label for="name">Me llamo</label>
-            <input type="text" id="name" placeholder="Pon aquí tu nombre...">
+        <div class="loginCampo">
+            <label for="loginName">Me llamo</label>
+            <input type="text" id="loginName" placeholder="Pon aquí tu nombre...">
         </div>
 
-        <div class="campo">
-            <label for="password">Mi contraseña es</label>
-            <input type="password" id="password" placeholder="Pon aquí tu contraseña...">
+        <div class="loginCampo">
+            <label for="loginPassword">Mi contraseña es</label>
+            <input type="password" id="loginPassword" placeholder="Pon aquí tu contraseña...">
         </div>
 
-        <div class="campo">
-            <label for="edad">Y tengo 
-            <input type="number" id="edad" placeholder="0"> años</label>
+        <div class="loginCampo">
+            <label for="loginEdad">Y tengo 
+            <input type="number" id="loginEdad" placeholder="0"> años</label>
         </div>
 
-        <button title="Introduce tu nombre, password y edad para continuar" id="loginBtn">Continuar...</button>
-        <p id="mensaje"></p>
+        <button id="loginBtn">Continuar...</button>
+        <p id="loginMensaje"></p>
         </div>
     </div>
 
     <div id="welcomeInterface" style="display:none;">
         <h1>¡HOLA <span id="welcomeNombre"></span>!</h1>
-
+        <br>
         <div id="welcomeNivel"></div>
-        <p>Como tienes <span id="welcomeEdad"></span> años,
-            te propongo el nivel <span id="welcomePropuesto"></span>.
-            ¿Qué te parece?</p>
+        <h2>Como tienes <span id="welcomeEdad"></span> años,
+            te propongo el nivel <span id="welcomePropuesto"></span>.</h2>
+        <br>
+        <h2>¿Qué te parece?</h2>
+        <br>
         <div class="welcomeBtn">
             <button id="welcomeBtnNext">¡Adelante!</button>
             <button id="welcomeBtnBack">Elegir otra edad...</button>
         </div>
     </div>
 
+    <div id="juegoInterface" style="display:none;">
+        <h1>Resuelve este problema</h1>
+        <div id="juegoOperacion"></div>
+        <h2>¿Cuál es la respuesta?</h2>
+        <div id="juegoRespuestas"></div>
+        <div class="juegoBtn">
+            <button id="juegoExit">Terminar Juego</button>
+        </div>
+    </div>
 
-    <script src="login.js"></script>
+    <div id="resultadoInterface" style="display:none;">
+        <h1>¡QUE PASADA!</h1>
+        <h2>Has realizado <span id="resultadoCantidad"></span> operaciones</h2>
+        <h2>Y has acertado <span id="resultadoAciertos"></span></h2>
+        <h2>¡Hasta la próxima!</h2>  
+        <div class="resultadoBtn">
+            <button id="resultadoBtnNext">¡Otra Vez!</button>
+            <button id="resultadoBtnBack">Elegir otro usuario...</button>
+        </div>
+    </div>
+
     <script src="funciones.js"></script>
 </body>
 </html>

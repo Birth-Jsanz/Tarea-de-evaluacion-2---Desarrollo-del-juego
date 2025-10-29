@@ -20,5 +20,13 @@
       "apellido" : "Olano",
       "usuario":"jolano",
       "contraseña":"9012Ijkl"
+   },
+
+   {
+      "id":4,
+      "nombre" : "udane",
+      "apellido" : "Olano",
+      "usuario":"jolano",
+      "contraseña":"udane1234"
    }
 ]
