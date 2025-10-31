@@ -11,20 +11,20 @@
 
         <div class="loginCampo">
             <label for="loginName">Me llamo</label>
-            <input type="text" id="loginName" placeholder="Pon aquí tu nombre...">
+            <input type="text" id="loginName" oninput="validarCampos()" placeholder="Pon aquí tu nombre...">
         </div>
 
         <div class="loginCampo">
             <label for="loginPassword">Mi contraseña es</label>
-            <input type="password" id="loginPassword" placeholder="Pon aquí tu contraseña...">
+            <input type="password" id="loginPassword" oninput="validarCampos()" placeholder="Pon aquí tu contraseña...">
         </div>
 
         <div class="loginCampo">
             <label for="loginEdad">Y tengo 
-            <input type="number" id="loginEdad" placeholder="0"> años</label>
+            <input type="number" id="loginEdad" oninput="validarCampos()" placeholder="0"> años</label>
         </div>
 
-        <button id="loginBtn">Continuar...</button>
+        <button id="loginBtn" onclick="revisarUsuario()">Continuar...</button>
         <p id="loginMensaje"></p>
         </div>
     </div>
@@ -39,8 +39,8 @@
         <h2>¿Qué te parece?</h2>
         <br>
         <div class="welcomeBtn">
-            <button id="welcomeBtnNext">¡Adelante!</button>
-            <button id="welcomeBtnBack">Elegir otra edad...</button>
+            <button id="welcomeBtnNext" onclick="welcomeBtnNext()">¡Adelante!</button>
+            <button id="welcomeBtnBack" onclick="welcomeBtnBack()">Elegir otra edad...</button>
         </div>
     </div>
 
@@ -49,8 +49,9 @@
         <div id="juegoOperacion"></div>
         <h2>¿Cuál es la respuesta?</h2>
         <div id="juegoRespuestas"></div>
+        <div id="juegoValoracion"></div>
         <div class="juegoBtn">
-            <button id="juegoExit">Terminar Juego</button>
+            <button id="juegoExit" onclick="juegoExit()">Terminar Juego</button>
         </div>
     </div>
 
@@ -60,8 +61,8 @@
         <h2>Y has acertado <span id="resultadoAciertos"></span></h2>
         <h2>¡Hasta la próxima!</h2>  
         <div class="resultadoBtn">
-            <button id="resultadoBtnNext">¡Otra Vez!</button>
-            <button id="resultadoBtnBack">Elegir otro usuario...</button>
+            <button id="resultadoBtnNext" onclick="resultadoBtnNext()">¡Otra Vez!</button>
+            <button id="resultadoBtnBack" onclick="resultadoBtnBack()">Elegir otro usuario...</button>
         </div>
     </div>
 

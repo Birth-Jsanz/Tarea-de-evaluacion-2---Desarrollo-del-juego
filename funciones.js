@@ -28,9 +28,9 @@ function mostrarPantallaWelcome(name, edad) {
     document.getElementById("welcomeNombre").textContent = name.toUpperCase();
     document.getElementById("welcomeEdad").textContent = edad;
 
-    if (edad >= 0 && edad <= 7) nivel = 1;
-    else if (edad >= 7 && edad <= 10) nivel = 2
-    else if (edad > 11) nivel = 3;
+    if (edad >= 0 && edad <= 5) nivel = 1;
+    else if (edad >= 6 && edad <= 10) nivel = 2
+    else if (edad >= 11) nivel = 3;
 
     document.getElementById("welcomePropuesto").textContent = nivel
 }
@@ -172,28 +172,32 @@ function mostrarPantallaJuego(nivel) {
 
     const contRespuestas = document.getElementById("juegoRespuestas");
     contRespuestas.innerHTML = "";
+    const mensaje = document.getElementById("juegoValoracion");
     posiblesRespuestas.forEach(opcion => {
         const btn = document.createElement("button");
         btn.classList.add("opcionBtn");
 
         btn.appendChild(simboloAImagenes(opcion));
 
-        btn.addEventListener("click", () => {
+        btn.onclick = () => {
             cantidadOperaciones++;
             if (opcion === respuestaOK) {
-                alert("¡Correcto!");
                 cantidadAciertos++;
-                mostrarPantallaJuego(nivel);
+                mensaje.textContent = "¡Correcto! Has acumulado un acierto."; 
+                setTimeout(() => {
+                    mensaje.textContent = "";
+                    mostrarPantallaJuego(nivel);
+                }, 3000);
             } else {
-                alert("Ups, inténtalo otra vez");
+                mensaje.textContent = "¡No! Has acumulado un fallo.";
             }
-        });
+        };
 
         contRespuestas.appendChild(btn);
     });
 }
 
-document.getElementById("loginBtn").addEventListener("click", async () => {
+async function revisarUsuario() {
     const name = nombreInput.value.trim();
     const password = passwordInput.value.trim();
     const edad = edadInput.value.trim();
@@ -212,50 +216,37 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
     } catch (error) {
         document.getElementById("loginMensaje").textContent = "Error al cargar usuarios";
         console.error(error);
-        }
-    });
+    }
+}
 
-
-
-document.getElementById("welcomeBtnNext").addEventListener("click", async () => {
-    mostrarPantallaJuego(nivel)
-    }); 
-
-
-[nombreInput, passwordInput, edadInput].forEach(input => {
-    input.addEventListener("input", validarCampos);
-});
-
-
-document.getElementById("welcomeBtnBack").addEventListener("click", () => {
-    document.getElementById("welcomeInterface").style.display = "none";
-    document.getElementById("loginInterface").style.display = "block";
-
-    textContent = "";
-});
-
-document.getElementById("juegoExit").addEventListener("click", () => {
-
-    document.getElementById("juegoInterface").style.display = "none";
-    document.getElementById("resultadoInterface").style.display = "block";
-
-    document.getElementById("resultadoCantidad").textContent = cantidadOperaciones;
-    document.getElementById("resultadoAciertos").textContent = cantidadAciertos;
-});
-
-
-document.getElementById("resultadoBtnNext").addEventListener("click", () => {
-    document.getElementById("resultadoInterface").style.display = "none";
-    document.getElementById("juegoInterface").style.display = "block";
-
+function welcomeBtnNext() {
     cantidadOperaciones = 0;
     cantidadAciertos = 0;
-});
+    mostrarPantallaJuego(nivel);
+}
 
+function welcomeBtnBack() {
+    document.getElementById("welcomeInterface").style.display = "none";
+    document.getElementById("loginInterface").style.display = "block";
+    document.getElementById("loginMensaje").textContent = "";
+}
 
-document.getElementById("resultadoBtnBack").addEventListener("click", () => {
+function juegoExit() {
+    document.getElementById("juegoInterface").style.display = "none";
+    document.getElementById("resultadoInterface").style.display = "block";
+    document.getElementById("resultadoCantidad").textContent = cantidadOperaciones;
+    document.getElementById("resultadoAciertos").textContent = cantidadAciertos;
+}
+
+function resultadoBtnNext() {
+    document.getElementById("resultadoInterface").style.display = "none";
+    cantidadOperaciones = 0;
+    cantidadAciertos = 0;
+    mostrarPantallaJuego(nivel);
+}
+
+function resultadoBtnBack() {
     document.getElementById("resultadoInterface").style.display = "none";
     document.getElementById("loginInterface").style.display = "block";
-    
-    textContent = "";
-});
+    document.getElementById("loginMensaje").textContent = "";
+}
