@@ -155,8 +155,12 @@ function operacionSegunNivel(nivel) {
     }
     posiblesRespuestas = posiblesRespuestas.sort(() => Math.random() - 0.5);
 
-    return { partesOperacion: [primerNumero.toString(), operador, segundoNumero.toString(), "=", resultado.toString()], 
-             respuestaOK: respuestaOK.toString(), posiblesRespuestas };
+    return {    partesOperacion: [  primerNumero.toString(), 
+                                    operador, 
+                                    segundoNumero.toString(), "=", 
+                                    resultado.toString()], 
+                respuestaOK: respuestaOK.toString(), 
+                posiblesRespuestas };
 
 }
 
