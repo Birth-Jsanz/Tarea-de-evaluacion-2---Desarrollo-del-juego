@@ -108,17 +108,30 @@ input[type="number"] {
 
 #juegoOperacion {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 12px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin-bottom: 50px;
 }
 
-#juegoOperacion img.simbolo {
-    max-height: 60px;       
-    width: auto;            
-    object-fit: contain;    
+#juegoOperacion img.simbolo { 
+    display: inline-block; 
+    vertical-align: middle; 
+    max-height: 60px; 
+    width: auto; 
+    object-fit: contain; 
+}
+
+#juegoOperacion .zonaDrop { 
+    display: inline-block; 
+    width: 60px; 
+    height: 60px; 
+    border: 2px dashed #333; 
+    vertical-align: middle; 
+    margin: 0 5px; 
+    background-color: white; 
 }
 
 #juegoRespuestas {
@@ -184,4 +197,29 @@ input[type="number"] {
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
+}
+
+.zonaDrop {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border: 2px dashed #333;
+    vertical-align: middle;
+    margin: 0 5px;
+}
+
+.arrastrar {
+    display: inline-block;
+    margin: 5px;
+    cursor: grab;
+}
+
+.arrastrar.arrastrando {
+    opacity: 0.7;
+    cursor: grabbing;
+}
+
+.numero {
+    display: inline-flex; 
+    align-items: center;
 }

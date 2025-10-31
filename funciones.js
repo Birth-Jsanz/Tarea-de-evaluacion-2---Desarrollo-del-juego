@@ -36,7 +36,7 @@ function mostrarPantallaWelcome(name, edad) {
 }
 
 
-function simboloAImagenes(simbolo) {
+function simbolosEnImagenes(simbolo) {
     const fragment = document.createDocumentFragment();
 
 
@@ -50,14 +50,18 @@ function simboloAImagenes(simbolo) {
     }
 
     const digitos = simbolo.toString().split(""); 
+    const grupo = document.createElement("span");
+    grupo.classList.add("numero"); 
+
     digitos.forEach(dig => {
         const img = document.createElement("img");
         img.src = "img/" + dig + ".png";
         img.alt = dig;
         img.classList.add("simbolo");
-        fragment.appendChild(img);
+        grupo.appendChild(img);
     });
 
+    fragment.appendChild(grupo);
     return fragment;
 }
 
@@ -161,39 +165,88 @@ function mostrarPantallaJuego(nivel) {
     document.getElementById("welcomeInterface").style.display = "none";
     document.getElementById("juegoInterface").style.display = "block";
 
-    const {partesOperacion, respuestaOK, posiblesRespuestas} = operacionSegunNivel(nivel);
+    const { partesOperacion, respuestaOK, posiblesRespuestas } = operacionSegunNivel(nivel);
 
     const cont = document.getElementById("juegoOperacion");
     cont.innerHTML = "";
 
+    // Crear la operación con un hueco "zonaDrop"
     partesOperacion.forEach(simbolo => {
-        cont.appendChild(simboloAImagenes(simbolo));
+        if (simbolo === "__") {
+            const zonaDrop = document.createElement("div");
+            zonaDrop.id = "zonaDrop";
+            zonaDrop.classList.add("zonaDrop");
+            cont.appendChild(zonaDrop);
+        } else {
+            cont.appendChild(simbolosEnImagenes(simbolo));
+        }
     });
 
     const contRespuestas = document.getElementById("juegoRespuestas");
     contRespuestas.innerHTML = "";
+
     const mensaje = document.getElementById("juegoValoracion");
+    mensaje.textContent = "";
+
+    // Crear las opciones como arrastrables
     posiblesRespuestas.forEach(opcion => {
-        const btn = document.createElement("button");
-        btn.classList.add("opcionBtn");
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("arrastrar");
+        wrapper.setAttribute("data-value", opcion);
+        wrapper.appendChild(simbolosEnImagenes(opcion));
 
-        btn.appendChild(simboloAImagenes(opcion));
+        let offsetX, offsetY;
 
-        btn.onclick = () => {
-            cantidadOperaciones++;
-            if (opcion === respuestaOK) {
-                cantidadAciertos++;
-                mensaje.textContent = "¡Correcto! Has acumulado un acierto."; 
-                setTimeout(() => {
-                    mensaje.textContent = "";
-                    mostrarPantallaJuego(nivel);
-                }, 3000);
-            } else {
-                mensaje.textContent = "¡No! Has acumulado un fallo.";
-            }
+        // Cuando empieza a arrastrar
+        wrapper.onmousedown = (e) => {
+            wrapper.classList.add("arrastrando");
+            offsetX = e.offsetX;
+            offsetY = e.offsetY;
+
+            document.onmousemove = (ev) => {
+                wrapper.style.position = "absolute";
+                wrapper.style.left = (ev.pageX - offsetX) + "px";
+                wrapper.style.top = (ev.pageY - offsetY) + "px";
+                wrapper.style.zIndex = 1000;
+            };
         };
 
-        contRespuestas.appendChild(btn);
+        // Cuando suelta
+        wrapper.onmouseup = (e) => {
+            document.onmousemove = null;
+            wrapper.classList.remove("arrastrando");
+
+            const zonaDrop = document.getElementById("zonaDrop");
+            const rect = zonaDrop.getBoundingClientRect();
+
+            // Comprobar si se soltó dentro del hueco
+            if (
+                e.clientX > rect.left &&
+                e.clientX < rect.right &&
+                e.clientY > rect.top &&
+                e.clientY < rect.bottom
+            ) {
+                cantidadOperaciones++;
+                if (opcion === respuestaOK) {
+                    zonaDrop.innerHTML = ""; // limpiar el hueco
+                    zonaDrop.appendChild(simbolosEnImagenes(opcion)); // meter la imagen/número correcto
+                    mensaje.textContent = "¡Correcto! Has acumulado un acierto.";
+                    cantidadAciertos++;
+                    wrapper.remove(); // quitar la ficha usada de las opciones
+                    setTimeout(() => mostrarPantallaJuego(nivel), 1500);
+                } else {
+                    mensaje.textContent = "¡No! Has acumulado un fallo. Inténtalo otra vez...";
+                    wrapper.style.position = "static";
+                    wrapper.style.zIndex = "auto";
+                }
+            }
+
+            // Reset posición
+            wrapper.style.position = "static";
+            wrapper.style.zIndex = "auto";
+        };
+
+        contRespuestas.appendChild(wrapper);
     });
 }
 
